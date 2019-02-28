@@ -34,7 +34,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines4";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines9";
 
 mongoose.connect(MONGODB_URI);
 
