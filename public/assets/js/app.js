@@ -4,7 +4,7 @@ $.getJSON("/articles", function (data) {
  // For each one
  for (var i = 0; i < data.length; i++) {
   // Display the apropos information on the page
-  $("#articles").append("<button data-id='" + data[i]._id + "' class='deletebtn'>X</button><p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].summary + "</p>");
+  $("#articles").append("<button data-id='" + data[i]._id + "' class='deletebtn'>X</button><p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].summary + "<button data-id='" + data[i]._id + "'  ' class='savebtn'>Save Article</button>'" +"</p>");
 }
 });
 
@@ -90,12 +90,33 @@ $(document).on("click", ".deletebtn", function () {
     // With that done
     .then(function (data) {
       location.reload();
-
-      
     });
 
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
+
+$(document).on("click", ".savebtn", function () {
+var id = $(this).attr("data-id");
+
+  $.ajax({
+    method: "PUT",
+    url: "/articles/saved/" + id,
+    data: {
+      saved: true
+    }
+  })
+  .then(function (data) {
+    console.log(data);
+  })
+  
+});
  
+
+
+///for backend
+// db.articles.update(
+//   {_id: id},
+//   {$set: 
+//     {saved: true}

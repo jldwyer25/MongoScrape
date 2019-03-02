@@ -107,6 +107,30 @@ app.delete("/articles/:id", function (req, res) {
         res.json(err);
       });
   });
+
+  app.get("/articles/saved", function(req, res) {
+    db.Article.findAll({saved: true})
+    .then(function(data) {
+      var hbsObject = {
+        articles: data
+      };
+      console.log(hbsObject);
+      res.render("saved", hbsObject);
+    })
+    .catch(function(err) {
+      res.json(err);
+    }) 
+  });
+
+  app.put("/articles/saved/:id", function(req, res) {
+    // db.Article.findOneAndUpdate({_id: req.params.id})
+    db.Article.update(
+        {_id: req.params.id},
+        {$set: req.body})
+        .then(function(data){
+          res.render("saved", data)
+        })
+        });
   
   // Route for saving/updating an Article's associated Note
   app.post("/articles/:id", function(req, res) {
