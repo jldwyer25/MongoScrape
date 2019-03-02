@@ -18,7 +18,7 @@ app.use(logger("dev"));
 
 
 // Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ useNewUrlParser: true }));
 app.use(express.json());
 
 
